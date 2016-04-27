@@ -19,7 +19,7 @@
   ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/vangj/jsbayes-viz",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
