@@ -3,14 +3,14 @@ jsbayes-viz
 
 This JavaScript library is a Bayesian Belief Network (BBN) visualization tool. It is built on the following projects.
 
-* (d3)[https://github.com/mbostock/d3]
-* (dagre)[https://github.com/cpettitt/dagre]
-* (jsbayes)[https://github.com/vangj/jsbayes]
+* [d3](https://github.com/mbostock/d3)
+* [dagre](https://github.com/cpettitt/dagre)
+* [jsbayes](https://github.com/vangj/jsbayes)
 
 How do I use jsbayes-viz?
 =========================
 
-You should only be using this library on the client-side (e.g. with a browser). You may install this library using (bower)[http://bower.io].
+You should only be using this library on the client-side (e.g. with a browser). You may install this library using [bower](http://bower.io).
 
 `bower install jsbayes-viz --save`
 
