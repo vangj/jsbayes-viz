@@ -1,0 +1,37 @@
+{
+  "name": "jsbayes-viz",
+  "version": "0.0.1",
+  "description": "Simple Bayesian Belief Network (BBN) visualization library.",
+  "main": "jsbayes-viz.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vangj/jsbayes-viz.git"
+  },
+  "keywords": [
+    "bayesian",
+    "network",
+    "javascript",
+    "probability",
+    "probabilistic",
+    "inference",
+    "sampling",
+    "visualization"
+  ],
+  "author": "Jee Vang <vangjee@gmail.com> (http://vangjee.wordpress.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vangj/jsbayes-viz/issues"
+  },
+  "dependencies": {
+    "d3": "^3.5.16",
+    "dagre": "^0.7.4",
+    "jsbayes": "0.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}

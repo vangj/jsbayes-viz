@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A demo!</title>
+  <style>
+    svg { border: 1px solid black; }
+  </style>
+  <script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/graphlib/dist/graphlib.core.js"></script>
+  <script src="bower_components/dagre/dist/dagre.core.js"></script>
+  <script src="bower_components/jsbayes/jsbayes.js"></script>
+  <script src="jsbayes-viz.js"></script>
+  <script>
+  function getGraph() {
+    var graph = jsbayes.newGraph();
+    var n1 = graph.addNode('n1', ['t', 'f']);
+    var n2 = graph.addNode('n2', ['t', 'f']);
+    var n3 = graph.addNode('n3', ['t', 'f']);
+    var n4 = graph.addNode('n4', ['t', 'f']);
+    var n5 = graph.addNode('n5', ['0', '1', '2']);
+    
+    n2.addParent(n1);
+    n3.addParent(n2);
+    n3.addParent(n4);
+    n5.addParent(n4);
+    
+    graph.reinit();
+    graph.sample(10000);
+    
+    var g = jsbayesviz.fromGraph(graph);
+    return g;
+  }
+  function start() {
+    var graph = getGraph();
+    jsbayesviz.draw({
+      id: '#bbn',
+      width: 800,
+      height: 800,
+      graph: graph,
+      samples: 15000
+    });
+  }
+  </script>
+</head>
+<body onload="start()">
+  <svg id="bbn">
+  </svg>
+</body>
+</html>
