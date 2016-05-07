@@ -202,8 +202,25 @@
           .append('path')
           .attr({
             d: 'M0,0 L0,6 L5,3 z',
-            fill: '#f00'
+            fill: '#f00',
+            class: 'edge-head'
           });
+  }
+  function formatValue(v) {
+    var MAX = 5;
+    var subchar = " ";
+    var value;
+    if(v.length < MAX) {
+      value = v;
+      for(var i=v.length; i < MAX; i++) {
+        value += subchar;
+      }
+    } else if(v.length > MAX) {
+      value = v.substr(0, MAX);
+    } else {
+      value = v;
+    }
+    return value;
   }
   function drawNodes(options) {
     var graph = options.graph;
@@ -216,13 +233,15 @@
         .append('g')
         .attr({
           id: function(d) { return d.id; },
-          transform: function(d) { return d.translate(); }
+          transform: function(d) { return d.translate(); },
+          class: 'node-group'
         });
     nodes.append('text')
       .attr({
         x: 2,
         y: 15,
         fill: 'black',
+        class: 'node-name',
         'font-family': 'sans-serif',
         'font-size': 15
       })
@@ -231,6 +250,7 @@
       .attr({
         x: 0,
         y: 0,
+        class: 'node-shape',
         style: 'stroke:#000000; fill:none;',
         width: function(d) { return d.width; },
         height: function(d) { return d.height; },
@@ -245,6 +265,7 @@
           .attr({
             x: 2,
             y: y,
+            class: 'node-value',
             'data-node': function(d) { return d.id; },
             'data-value': function(d) { return d.values[i]; }
           })
@@ -289,7 +310,7 @@
               }
             }
           })
-          .text(function(d) { return d.values[i]; });
+          .text(function(d) { return formatValue(d.values[i]); });
         y += 15;
       }
     });
@@ -303,6 +324,7 @@
             y: y,
             width: d.probs[i] * 100,
             height: 10,
+            class: 'node-bar',
             'data-node': function(d) { return d.id; },
             'data-value': function(d) { return d.values[i]; }
           });
@@ -367,6 +389,7 @@
             x2: points.x2,
             y2: points.y2,
             style: 'stroke:rgb(255,0,0);stroke-width:2',
+            class: 'edge-line',
             'marker-end': 'url(#arrow)'
           });
         });
