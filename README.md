@@ -68,6 +68,29 @@ jsbayesviz.draw({
 });
 ```
 
+You may also download the samples in JSON or CSV format. To download in JSON format, call the following method. Note the first parameter is the graph (jsbayes-viz graph, *NOT* the jsbayes graph), the second parameter specifies the format (true means JSON and false means CSV), and the last parameter are options. Options are only available for CSV format, namely, to specify row and field delimiters.
+
+
+```
+jsbayesviz.downloadSamples(graph, true, {});
+```
+
+An example of downloading samples as CSV is shown below.
+
+```
+jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
+```
+
 Some gotcha's
 =============
-If you have very long string literals as values for the node id/values, then these strings will draw outside the rectangular nodes. Styling the nodes is work in progress, and will be added at a later date. Right now, you'll have to live with the black and white nodes with red arcs.
+If you have very long string literals as values for the node id/values, then these strings will truncated to 5 characters at the current moment.
+
+Each of the SVG components are now associated with a CSS class. You may apply a stylesheet to customize the look and feel of each of these SVG components/elements.
+
+* .node-group : all the elements belonging to a node
+* .node-name : the name of a node
+* .node-shape : the rectangle that encloses all the elements belonging to a node
+* .node-value : the node values
+* .node-bar : the belief bars
+* .edge-line : the arc between two nodes
+* .edge-head : the arrow head at the end of an arc

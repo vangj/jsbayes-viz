@@ -47,52 +47,11 @@
       });
       
       $('#btnDownloadJson').click(function() {
-        console.log('download json');
-        var samples = graph.graph.samples;
-        
-        var data = 'data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(samples));
-        var filename = 'data-' + Date.now() + '.json';
-        $('#jsonLink')
-          .attr('href', data)
-          .attr('download', filename);
-        $('#jsonLink')[0].click();
+        jsbayesviz.downloadSamples(graph, true, {});
       });
       
       $('#btnDownloadCsv').click(function() {
-        var D_ROW = '\n';
-        var D_FIELD = ',';
-        var csv = '';
-        var row = '';
-        for(var i=0; i < graph.graph.nodes.length; i++) {
-          row += graph.graph.nodes[i].name;
-          if(i < graph.graph.nodes.length-1) {
-            row += D_FIELD;
-          }
-        }
-        csv += row + D_ROW;
-        
-        for(var i=0; i < graph.graph.samples.length; i++) {
-          var sample = graph.graph.samples[i];
-          row = '';
-          for(var j=0; j < graph.graph.nodes.length; j++) {
-            var node = graph.graph.nodes[j];
-            row += sample[node.name];
-            if(j < graph.graph.nodes.length-1) {
-              row += D_FIELD;
-            }
-          }
-          csv += row;
-          if(i < graph.graph.samples.length-1) {
-            csv += D_ROW;
-          }
-        }
-        
-        var data = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-        var filename = 'data-' + Date.now() + '.csv';
-        $('#csvLink')
-          .attr('href', data)
-          .attr('download', filename);
-        $('#csvLink')[0].click();
+        jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
       });
     })(window);
   });
@@ -104,8 +63,6 @@
   <div>
     <button id="btnDownloadJson">download samples as json</button>
     <button id="btnDownloadCsv">download samples as csv</button>
-    <a id="jsonLink" href="" download="" style="visibility:hidden">json</a>
-    <a id="csvLink" href="" download="" style="visibility:hidden">csv</a>
   </div>
 </body>
 </html>

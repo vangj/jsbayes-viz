@@ -412,6 +412,15 @@
     }
     return probs;
   }
+  function downloadData(data, filename) {
+    var link = document.createElement('a');
+    link.href = data;
+    link.download = filename;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
   function defineLib() {
     var lib = {};
 
@@ -434,7 +443,21 @@
     lib.draw = function(options) {
       drawGraph(options);
     }
-
+    
+    lib.downloadSamples = function(graph, asJson, options) {
+      var data, filename;
+      if(asJson) {
+        var samples = graph.graph.samples;
+        data = 'data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(samples));
+        filename = 'data-' + Date.now() + '.json';
+      } else {
+        var csv = graph.graph.samplesAsCsv(options);
+        data = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+        filename = 'data-' + Date.now() + '.csv';
+      }
+      downloadData(data, filename);
+    }
+    
     return lib;
   }
 
