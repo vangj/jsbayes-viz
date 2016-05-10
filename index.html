@@ -9,16 +9,19 @@
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/graphlib/dist/graphlib.core.js"></script>
   <script src="bower_components/dagre/dist/dagre.core.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/jsbayes/jsbayes.js"></script>
   <script src="jsbayes-viz.js"></script>
   <script>
   function getGraph() {
     var graph = jsbayes.newGraph();
-    var n1 = graph.addNode('n1', ['t', 'f']);
-    var n2 = graph.addNode('n2', ['t', 'f']);
-    var n3 = graph.addNode('n3', ['t', 'f']);
-    var n4 = graph.addNode('n4', ['t', 'f']);
-    var n5 = graph.addNode('n5', ['0', '1', '12345']);
+    graph.saveSamples = true;
+    
+    var n1 = graph.addNode('n1', ['true', 'false']);
+    var n2 = graph.addNode('n2', ['true', 'false']);
+    var n3 = graph.addNode('n3', ['true', 'false']);
+    var n4 = graph.addNode('n4', ['true', 'false']);
+    var n5 = graph.addNode('n5', ['yes', 'maybe', 'no']);
     
     n2.addParent(n1);
     n3.addParent(n2);
@@ -31,20 +34,78 @@
     var g = jsbayesviz.fromGraph(graph);
     return g;
   }
-  function start() {
-    var graph = getGraph();
-    jsbayesviz.draw({
-      id: '#bbn',
-      width: 800,
-      height: 800,
-      graph: graph,
-      samples: 15000
-    });
-  }
+  
+  $(document).ready(function() {
+    (function(window) { 
+      var graph = getGraph();
+      jsbayesviz.draw({
+        id: '#bbn',
+        width: 800,
+        height: 800,
+        graph: graph,
+        samples: 15000
+      });
+      
+      $('#btnDownloadJson').click(function() {
+        console.log('download json');
+        var samples = graph.graph.samples;
+        
+        var data = 'data:text/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(samples));
+        var filename = 'data-' + Date.now() + '.json';
+        $('#jsonLink')
+          .attr('href', data)
+          .attr('download', filename);
+        $('#jsonLink')[0].click();
+      });
+      
+      $('#btnDownloadCsv').click(function() {
+        var D_ROW = '\n';
+        var D_FIELD = ',';
+        var csv = '';
+        var row = '';
+        for(var i=0; i < graph.graph.nodes.length; i++) {
+          row += graph.graph.nodes[i].name;
+          if(i < graph.graph.nodes.length-1) {
+            row += D_FIELD;
+          }
+        }
+        csv += row + D_ROW;
+        
+        for(var i=0; i < graph.graph.samples.length; i++) {
+          var sample = graph.graph.samples[i];
+          row = '';
+          for(var j=0; j < graph.graph.nodes.length; j++) {
+            var node = graph.graph.nodes[j];
+            row += sample[node.name];
+            if(j < graph.graph.nodes.length-1) {
+              row += D_FIELD;
+            }
+          }
+          csv += row;
+          if(i < graph.graph.samples.length-1) {
+            csv += D_ROW;
+          }
+        }
+        
+        var data = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+        var filename = 'data-' + Date.now() + '.csv';
+        $('#csvLink')
+          .attr('href', data)
+          .attr('download', filename);
+        $('#csvLink')[0].click();
+      });
+    })(window);
+  });
   </script>
 </head>
-<body onload="start()">
+<body>
   <svg id="bbn">
   </svg>
+  <div>
+    <button id="btnDownloadJson">download samples as json</button>
+    <button id="btnDownloadCsv">download samples as csv</button>
+    <a id="jsonLink" href="" download="" style="visibility:hidden">json</a>
+    <a id="csvLink" href="" download="" style="visibility:hidden">csv</a>
+  </div>
 </body>
 </html>
