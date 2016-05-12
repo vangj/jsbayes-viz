@@ -113,4 +113,4 @@ If you have very long string literals as values for the node id/values, then the
 
 Lastly
 ======
-An working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/) and you may fork the demo code by clicking [here](https://plnkr.co/edit/fjL6Yq).
+A working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/) and you may fork the demo code by clicking [here](https://plnkr.co/edit/fjL6Yq).
