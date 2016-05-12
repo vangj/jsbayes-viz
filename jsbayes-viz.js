@@ -208,7 +208,7 @@
   }
   function formatValue(v) {
     var MAX = 5;
-    var subchar = " ";
+    var subchar = '\u00A0';
     var value;
     if(v.length < MAX) {
       value = v;
@@ -242,7 +242,7 @@
         y: 15,
         fill: 'black',
         class: 'node-name',
-        'font-family': 'sans-serif',
+        'font-family': 'monospace',
         'font-size': 15
       })
       .text(function(d) { return d.id; });
@@ -266,6 +266,7 @@
             x: 2,
             y: y,
             class: 'node-value',
+            'font-family': 'monospace',
             'data-node': function(d) { return d.id; },
             'data-value': function(d) { return d.values[i]; }
           })
