@@ -222,6 +222,15 @@
     }
     return value;
   }
+  function formatPct(p) {
+    var pct = (p * 100).toFixed(2);
+    if(pct.length < 6) {
+      while(pct.length < 6) {
+        pct = '\u00A0' + pct;
+      }
+    }
+    return pct;
+  }
   function drawNodes(options) {
     var graph = options.graph;
     var SAMPLES = options.samples || 10000;
@@ -308,10 +317,31 @@
                   .attr({
                     width: prob
                   });
+                
+                selector = 'text[data-node="' + node.id + '"][data-pvalue="' + value + '"]';
+                d3.select(selector)
+                  .text(formatPct(node.probs[j]));
               }
             }
           })
           .text(function(d) { return formatValue(d.values[i]); });
+        y += 15;
+      }
+    });
+    nodes.each(function(d) {
+      var y = 30;
+      for (var i = 0; i < d.probs.length; i++) {
+        d3.select(this)
+          .append('text')
+          .attr({
+            x: 2 + d.width,
+            y: y,
+            'font-family': 'monospace',
+            class: 'node-pct',
+            'data-node': function(d) { return d.id; },
+            'data-pvalue': function(d) { return d.values[i]; }
+          })
+          .text(function(d) { return formatPct(d.probs[i]); });
         y += 15;
       }
     });
