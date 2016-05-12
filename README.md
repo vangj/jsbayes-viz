@@ -81,10 +81,8 @@ An example of downloading samples as CSV is shown below.
 jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
 ```
 
-Some gotcha's
-=============
-If you have very long string literals as values for the node id/values, then these strings will truncated to 5 characters at the current moment.
-
+Styling
+=======
 Each of the SVG components are now associated with a CSS class. You may apply a stylesheet to customize the look and feel of each of these SVG components/elements.
 
 * .node-group : all the elements belonging to a node
@@ -105,3 +103,7 @@ svg g text.node-value { fill:rgb(0,0,0) !important; font-size: 15px; cursor: poi
 svg line.edge-line { stroke:rgb(0,0,0) !important }
 svg path.edge-head { fill:rgb(0,0,0) !important }
 ```
+
+Some gotcha's
+=============
+If you have very long string literals as values for the node id/values, then these strings will truncated to 5 characters at the current moment.
