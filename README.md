@@ -94,3 +94,14 @@ Each of the SVG components are now associated with a CSS class. You may apply a 
 * .node-bar : the belief bars
 * .edge-line : the arc between two nodes
 * .edge-head : the arrow head at the end of an arc
+
+Here's an example.
+
+```
+svg g rect.node-shape { border-radius: 5px !important; fill:#ffecb3 !important; cursor: move; }
+svg g text.node-name { font-weight: 800 !important }
+svg g rect.node-bar { fill: green !important }
+svg g text.node-value { fill:rgb(0,0,0) !important; font-size: 15px; cursor: pointer; }
+svg line.edge-line { stroke:rgb(0,0,0) !important }
+svg path.edge-head { fill:rgb(0,0,0) !important }
+```
