@@ -34,8 +34,24 @@
     n3.addParent(n4);
     n5.addParent(n4);
     
-    graph.reinit();
-    graph.sample(10000);
+    n1.setCpt([ 0.2, 0.8 ]);
+    n2.setCpt([
+      [ 0.8, 0.2 ],
+      [ 0.2, 0.8 ]
+    ]);
+    n3.setCpt([
+      [ 0.99, 0.01 ],
+      [ 0.6, 0.4 ],
+      [ 0.6, 0.4 ],
+      [ 0.01, 0.99 ]
+    ]);
+    n4.setCpt([ 0.6, 0.4 ]);
+    n5.setCpt([
+      [ 0.6, 0.3, 0.1 ],
+      [ 0.1, 0.3, 0.6 ]
+    ]);
+    
+    graph.sample(20000);
     
     var g = jsbayesviz.fromGraph(graph);
     return g;
