@@ -89,7 +89,9 @@ Each of the SVG components are now associated with a CSS class. You may apply a 
 * .node-name : the name of a node
 * .node-shape : the rectangle that encloses all the elements belonging to a node
 * .node-value : the node values
+* .node-pct : the node marginal probabilities correspoding to the values
 * .node-bar : the belief bars
+* .node-iqline : the interquartile lines (e.g. 25%, 50%, 75%)
 * .edge-line : the arc between two nodes
 * .edge-head : the arrow head at the end of an arc
 
@@ -103,6 +105,7 @@ svg g text.node-value { fill:rgb(0,0,0) !important; font-size: 15px; cursor: poi
 svg line.edge-line { stroke:rgb(0,0,0) !important }
 svg path.edge-head { fill:rgb(0,0,0) !important }
 ```
+Note that some styles for the elements are inlined and so you must use `!important` to override them.
 
 Some gotcha's
 =============

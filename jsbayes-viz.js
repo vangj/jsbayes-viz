@@ -377,6 +377,7 @@
             y1: y1,
             x2: x,
             y2: y2,
+            class: 'node-iqline',
             'stroke-dasharray': '5, 1',
             style: 'stroke:black; stroke-width:1px',
           });
