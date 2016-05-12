@@ -101,7 +101,7 @@
       },
       addNode: function(id, label, values, probs) {
         var width = 150;
-        var height = (values.length + 1) * 17;
+        var height = values.length * 15 + 20; 
         var node = {
           id: id,
           label: label,
@@ -330,6 +330,27 @@
             'data-value': function(d) { return d.values[i]; }
           });
         y += 15;
+      }
+    });
+    nodes.each(function(d) {
+      var y1 = 20;
+      var y2 = d.height - 5;
+      var width = d.width - 50;
+      var xInc = width / 4.0;
+      var x = 50 + xInc;
+      
+      for(var i=0; i < 3; i++) {
+        d3.select(this)
+          .append('line')
+          .attr({
+            x1: x,
+            y1: y1,
+            x2: x,
+            y2: y2,
+            'stroke-dasharray': '5, 1',
+            style: 'stroke:black; stroke-width:1px',
+          });
+        x += xInc;
       }
     });
 
