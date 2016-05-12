@@ -236,16 +236,6 @@
           transform: function(d) { return d.translate(); },
           class: 'node-group'
         });
-    nodes.append('text')
-      .attr({
-        x: 2,
-        y: 15,
-        fill: 'black',
-        class: 'node-name',
-        'font-family': 'monospace',
-        'font-size': 15
-      })
-      .text(function(d) { return d.id; });
     nodes.append('rect')
       .attr({
         x: 0,
@@ -257,6 +247,16 @@
         'pointer-events': 'visible',
         'data-node': function(d) { return d.id; }
       });
+    nodes.append('text')
+      .attr({
+        x: 2,
+        y: 15,
+        fill: 'black',
+        class: 'node-name',
+        'font-family': 'monospace',
+        'font-size': 15
+      })
+      .text(function(d) { return d.id; });
     nodes.each(function(d) {
       var y = 30;
       for(var i=0; i < d.values.length; i++) {
@@ -398,8 +398,8 @@
   function drawGraph(options) {
     initSvg(options);
     layoutGraph(options.graph);
-    drawNodes(options);
     drawEdges(options);
+    drawNodes(options);
   }
   function normalize(sampledLw) {
     var sum = 0;
