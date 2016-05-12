@@ -1,7 +1,7 @@
 {
   "name": "jsbayes-viz",
-  "version": "0.0.2",
-  "description": "Simple Bayesian Belief Network (BBN) visualization library.",
+  "version": "0.0.3",
+  "description": "Simple Bayesian Belief Network (BBN) visualization and interaction library.",
   "main": "jsbayes-viz.js",
   "scripts": {
     "test": "make test"
