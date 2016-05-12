@@ -110,3 +110,7 @@ Note that some styles for the elements are inlined and so you must use `!importa
 Some gotcha's
 =============
 If you have very long string literals as values for the node id/values, then these strings will truncated to 5 characters at the current moment.
+
+Lastly
+======
+An working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/) and you may fork the demo code by clicking [here](https://plnkr.co/edit/fjL6Yq).
