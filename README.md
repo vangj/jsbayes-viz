@@ -109,7 +109,7 @@ Note that some styles for the elements are inlined and so you must use `!importa
 
 Some gotcha's
 =============
-If you have very long string literals as values for the node id/values, then these strings will truncated to 5 characters at the current moment.
+If you have very long string literals as values for the node id/values, then these strings will be truncated to 5 characters at the current moment. Node names are also truncated to 15 characters.
 
 Lastly
 ======

@@ -231,6 +231,13 @@
     }
     return pct;
   }
+  function formatNodeName(name) {
+    var MAX = 15;
+    if(name.length < MAX) {
+      return name;
+    }
+    return name.substr(0, MAX);
+  }
   function drawNodes(options) {
     var graph = options.graph;
     var SAMPLES = options.samples || 10000;
@@ -274,7 +281,7 @@
         'font-family': 'monospace',
         'font-size': 15
       })
-      .text(function(d) { return d.id; })
+      .text(function(d) { return formatNodeName(d.id); })
       .style('text-anchor', 'middle');
     nodes.each(function(d) {
       var y = 30;
