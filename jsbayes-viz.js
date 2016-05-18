@@ -244,6 +244,15 @@
           id: function(d) { return d.id; },
           transform: function(d) { return d.translate(); },
           class: 'node-group'
+        })
+        .on('mousedown', function(d) { 
+          d3.selectAll('g.node-group').sort(function(a, b) {
+            if(a.id !== d.id) {
+              return -1;
+            } else {
+              return 1;
+            }
+          });
         });
     nodes.append('rect')
       .attr({
@@ -258,14 +267,15 @@
       });
     nodes.append('text')
       .attr({
-        x: 2,
+        x: function(d) { return d.width / 2; },
         y: 15,
         fill: 'black',
         class: 'node-name',
         'font-family': 'monospace',
         'font-size': 15
       })
-      .text(function(d) { return d.id; });
+      .text(function(d) { return d.id; })
+      .style('text-anchor', 'middle');
     nodes.each(function(d) {
       var y = 30;
       for(var i=0; i < d.values.length; i++) {
