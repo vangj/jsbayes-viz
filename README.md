@@ -1,7 +1,7 @@
 jsbayes-viz
 ===========
 
-This JavaScript library is a Bayesian Belief Network (BBN) visualization tool. It is built on the following projects.
+This JavaScript library is a Bayesian Belief Network (BBN) visualization and interaction tool. It is built on the following projects.
 
 * [d3](https://github.com/mbostock/d3)
 * [dagre](https://github.com/cpettitt/dagre)
