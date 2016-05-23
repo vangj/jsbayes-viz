@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A demo!</title>
-  <style>
-    svg { border: 1px solid black; }
-    svg g rect.node-shape { border-radius: 5px !important; fill:#ffecb3 !important; cursor: move; }
-    svg g text.node-name { font-weight: 800 !important }
-    svg g rect.node-bar { fill: green !important }
-    svg g text.node-value { fill:rgb(0,0,0) !important; font-size: 15px; cursor: pointer; }
-    svg line.edge-line { stroke:rgb(0,0,0) !important }
-    svg path.edge-head { fill:rgb(0,0,0) !important }
-  </style>
+  <title>jsbayes discrete bayesian belief network visualization and interaction example</title>
+  <link href="jsbayes-viz.css" type="text/css" rel="stylesheet">
   <script src="bower_components/d3/d3.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/graphlib/dist/graphlib.core.js"></script>
@@ -22,18 +14,18 @@
   function getGraph() {
     var graph = jsbayes.newGraph();
     graph.saveSamples = true;
-    
+
     var n1 = graph.addNode('n1', ['true', 'false']);
     var n2 = graph.addNode('n2', ['true', 'false']);
     var n3 = graph.addNode('n3', ['true', 'false']);
     var n4 = graph.addNode('n4', ['true', 'false']);
     var n5 = graph.addNode('n5', ['yes', 'maybe', 'no']);
-    
+
     n2.addParent(n1);
     n3.addParent(n2);
     n3.addParent(n4);
     n5.addParent(n4);
-    
+
     n1.setCpt([ 0.25, 0.75 ]);
     n2.setCpt([
       [ 0.8, 0.2 ],
@@ -50,15 +42,15 @@
       [ 0.6, 0.3, 0.1 ],
       [ 0.1, 0.3, 0.6 ]
     ]);
-    
+
     graph.sample(20000);
-    
+
     var g = jsbayesviz.fromGraph(graph);
     return g;
   }
-  
+
   $(document).ready(function() {
-    (function(window) { 
+    (function(window) {
       var graph = getGraph();
       jsbayesviz.draw({
         id: '#bbn',
@@ -67,11 +59,11 @@
         graph: graph,
         samples: 15000
       });
-      
+
       $('#btnDownloadJson').click(function() {
         jsbayesviz.downloadSamples(graph, true);
       });
-      
+
       $('#btnDownloadCsv').click(function() {
         jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
       });
