@@ -113,6 +113,11 @@ A working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/
 
 * [Asia](https://run.plnkr.co/plunks/CJe4LbYhx42TAPXjIUum/)
 
+Here are some repositories of BBNs that you may use.
+
+* [bnlearn](http://www.bnlearn.com/bnrepository/)
+* [netica](http://www.norsys.com/networklibrary.html)
+
 # Unit Testing
 
 To run the unit tests, make sure you have NodeJS and npm installed and type in the following.
