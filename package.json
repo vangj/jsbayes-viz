@@ -28,7 +28,7 @@
   "dependencies": {
     "d3": "^3.5.16",
     "dagre": "^0.8.2",
-    "jsbayes": "0.0.5"
+    "jsbayes": "0.0.6"
   },
   "devDependencies": {
     "chai": "^3.5.0",
