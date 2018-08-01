@@ -117,6 +117,8 @@ Here are some repositories of BBNs that you may use.
 
 * [bnlearn](http://www.bnlearn.com/bnrepository/)
 * [netica](http://www.norsys.com/networklibrary.html)
+* [Gal Elidan](http://www.cs.huji.ac.il/~galel/Repository/)
+* [javabayes](https://www.cs.cmu.edu/~javabayes/Home/node7.html)
 
 # Unit Testing
 
