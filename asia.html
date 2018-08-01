@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>asia, jsbayes discrete bayesian belief network visualization and interaction example</title>
+  <link href="jsbayes-viz.css" type="text/css" rel="stylesheet">
+  <script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/graphlib/dist/graphlib.core.js"></script>
+  <script src="bower_components/dagre/dist/dagre.core.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jsbayes/jsbayes.js"></script>
+  <script src="jsbayes-viz.js"></script>
+  <script>
+  function getGraph() {
+    var graph = jsbayes.newGraph();
+    graph.saveSamples = true;
+
+    var visitAsia = graph.addNode('VisitAsia', ['Visit', 'No_Visit']);
+    var tuberculosis = graph.addNode('Tuberculosis', ['Present', 'Absent']);
+    var smoking = graph.addNode('Smoking', ['Smoker', 'NonSmoker']);
+    var cancer = graph.addNode('Cancer', ['Present', 'Absent']);
+    var tborca = graph.addNode('TbOrCa', ['True', 'False']);
+    var xray = graph.addNode('XRay', ['Abnormal', 'Normal']);
+    var bronchitis = graph.addNode('Bronchitis', ['Present', 'Absent']);
+    var dyspnea = graph.addNode('Dyspnea', ['Present', 'Absent']);
+
+    tuberculosis.addParent(visitAsia);
+    cancer.addParent(smoking);
+    tborca.addParent(tuberculosis);
+    tborca.addParent(cancer);
+    xray.addParent(tborca);
+    bronchitis.addParent(smoking);
+    dyspnea.addParent(tborca);
+    dyspnea.addParent(bronchitis);
+
+    visitAsia.setCpt([0.01, 0.99]);
+    tuberculosis.setCpt([
+      [0.05, 0.95], 
+      [0.01, 0.99]
+    ]);
+    smoking.setCpt([0.5, 0.5]);
+    cancer.setCpt([
+      [0.1, 0.9], 
+      [0.01, 0.99]
+    ]);
+    tborca.setCpt([
+      [1.0, 0.0], 
+      [1.0, 0.0], 
+      [1.0, 0.0], 
+      [0.0, 1.0]
+    ]);
+    xray.setCpt([
+      [0.98, 0.02], 
+      [0.05, 0.95]
+    ]);
+    bronchitis.setCpt([
+      [0.6, 0.4], 
+      [0.3, 0.7]
+    ]);
+    dyspnea.setCpt([
+      [0.9, 0.1],
+      [0.7, 0.3],
+      [0.8, 0.2],
+      [0.1, 0.9]
+    ]);
+
+    graph.sample(20000);
+
+    var g = jsbayesviz.fromGraph(graph);
+    return g;
+  }
+
+  $(document).ready(function() {
+    (function(window) {
+      var graph = getGraph();
+      jsbayesviz.draw({
+        id: '#bbn',
+        width: 800,
+        height: 800,
+        graph: graph,
+        samples: 15000
+      });
+
+      $('#btnDownloadJson').click(function() {
+        jsbayesviz.downloadSamples(graph, true);
+      });
+
+      $('#btnDownloadCsv').click(function() {
+        jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
+      });
+    })(window);
+  });
+  </script>
+</head>
+<body>
+  <svg id="bbn">
+  </svg>
+  <div>
+    <button id="btnDownloadJson">download samples as json</button>
+    <button id="btnDownloadCsv">download samples as csv</button>
+  </div>
+</body>
+</html>
