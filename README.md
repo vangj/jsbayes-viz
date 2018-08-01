@@ -111,6 +111,8 @@ If you have very long string literals as values for the node id/values, then the
 # Lastly
 A working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/) and you may fork the demo code by clicking [here](https://plnkr.co/edit/fjL6Yq).
 
+* [Asia](https://run.plnkr.co/plunks/CJe4LbYhx42TAPXjIUum/)
+
 # Unit Testing
 
 To run the unit tests, make sure you have NodeJS and npm installed and type in the following.
