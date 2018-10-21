@@ -9,19 +9,19 @@ This JavaScript library is a Bayesian Belief Network (BBN) visualization and int
 
 # How do I use jsbayes-viz?
 
-You should only be using this library on the client-side (e.g. with a browser). You may install this library using [bower](http://bower.io).
+You should only be using this library on the client-side (e.g. with a browser). You may install this library using npm.
 
-`bower install jsbayes-viz --save`
+`npm install jsbayes-viz --save`
 
 Since there are third party dependencies, you need to reference them in your HTML in the following order. Assuming you have used bower to install the library (and its dependencies), you may reference the libaries as the following.
 
 ```
-<script src="bower_components/d3/d3.js"></script>
-<script src="bower_components/lodash/lodash.js"></script>
-<script src="bower_components/graphlib/dist/graphlib.core.js"></script>
-<script src="bower_components/dagre/dist/dagre.core.js"></script>
-<script src="bower_components/jsbayes/jsbayes.js"></script>
-<script src="bower_components/jsbayes-viz/jsbayes-viz.js"></script>
+<script src="node_modules/d3/d3.js"></script>
+<script src="node_modules/lodash/lodash.js"></script>
+<script src="node_modules/graphlib/dist/graphlib.core.js"></script>
+<script src="node_modules/dagre/dist/dagre.core.js"></script>
+<script src="node_modules/jsbayes/jsbayes.js"></script>
+<script src="node_modules/jsbayes-viz/jsbayes-viz.js"></script>
 ```
 
 jsbayes is the inference engine, so to use jsbayes-viz, first create a jsbayes graph.
