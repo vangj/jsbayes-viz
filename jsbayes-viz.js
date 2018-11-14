@@ -238,6 +238,34 @@
     }
     return name.substr(0, MAX);
   }
+
+  function drawNodeBars(graph) {
+    var g = graph.graph;
+
+    for(var i=0; i < g.nodes.length; i++) {
+      var nOut = g.nodes[i];
+      var nIn = graph.nodes[i];
+      nIn.probs = nOut.probs();
+    }
+
+    for(var i=0; i < graph.nodes.length; i++) {
+      var node = graph.nodes[i];
+      for(var j=0; j < node.values.length; j++) {
+        var value = node.values[j];
+        var prob = node.probs[j] * 100;
+        var selector = 'rect[data-node="' + node.id + '"][data-value="' + value + '"]';
+        d3.select(selector)
+            .attr({
+                width: prob
+            });
+
+        selector = 'text[data-node="' + node.id + '"][data-pvalue="' + value + '"]';
+        d3.select(selector)
+            .text(formatPct(node.probs[j]));
+      }
+    }
+  }
+
   function drawNodes(options) {
     var graph = options.graph;
     var SAMPLES = options.samples || 10000;
@@ -305,41 +333,20 @@
           
             if(undefined === node.isObserved || false === node.isObserved) {
               g.observe(id, v);
-              g.sample(SAMPLES);
             } else {
               var index1 = g.node(id).valueIndex(v);
               var index2 = g.node(id).value;
               if(index1 === index2) {
                 g.unobserve(id);
-                g.sample(SAMPLES);
               } else {
                 g.observe(id, v);
-                g.sample(SAMPLES);
               }
             }
-          
-            for(var i=0; i < g.nodes.length; i++) {
-              var nOut = g.nodes[i];
-              var nIn = graph.nodes[i];
-              nIn.probs = nOut.probs();
-            }
-          
-            for(var i=0; i < graph.nodes.length; i++) {
-              var node = graph.nodes[i];
-              for(var j=0; j < node.values.length; j++) {
-                var value = node.values[j];
-                var prob = node.probs[j] * 100;
-                var selector = 'rect[data-node="' + node.id + '"][data-value="' + value + '"]';
-                d3.select(selector)
-                  .attr({
-                    width: prob
-                  });
-                
-                selector = 'text[data-node="' + node.id + '"][data-pvalue="' + value + '"]';
-                d3.select(selector)
-                  .text(formatPct(node.probs[j]));
-              }
-            }
+
+            g.sample(SAMPLES)
+              .then(function (r) {
+                drawNodeBars(graph);
+              });
           })
           .text(function(d) { return formatValue(d.values[i]); });
         y += 15;
@@ -470,10 +477,6 @@
     drawEdges(options);
     drawNodes(options);
   }
-  function redrawGraph(options) {
-    drawEdges(options);
-    drawNodes(options);
-  }
   function normalize(sampledLw) {
     var sum = 0;
     var probs = [];
@@ -518,8 +521,8 @@
       drawGraph(options);
     }
 
-    lib.redraw = function(options) {
-      redrawGraph(options);
+    lib.redrawProbs = function(options) {
+      drawNodeBars(options.graph);
     }
     
     lib.downloadSamples = function(graph, asJson, options) {
