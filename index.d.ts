@@ -1,11 +1,11 @@
-interface Graph {
+interface VGraph {
 
 }
 interface DrawOptions {
   id: string;
   width: number;
   height: number;
-  graph: Graph;
+  graph: VGraph;
   samples: number;
 }
 interface CsvOptions {
@@ -13,9 +13,9 @@ interface CsvOptions {
   fieldDelimiter: string;
 }
 interface JsBayesViz {
-  fromGraph(graph: any): Graph;
+  fromGraph(graph: any): VGraph;
   draw(options: DrawOptions): void;
-  downloadSamples(graph: Graph, asJson: boolean, options: CsvOptions | any): void;
+  downloadSamples(graph: VGraph, asJson: boolean, options: CsvOptions | any): void;
 }
 declare module "jsbayes-viz" {
   let jsbayesviz: JsBayesViz;
