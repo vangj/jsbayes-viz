@@ -477,6 +477,10 @@
     drawEdges(options);
     drawNodes(options);
   }
+  function redrawGraph(options) {
+    drawEdges(options);
+    drawNodes(options);
+  }
   function normalize(sampledLw) {
     var sum = 0;
     var probs = [];
@@ -519,6 +523,10 @@
 
     lib.draw = function(options) {
       drawGraph(options);
+    }
+
+    lib.redraw = function(options) {
+      redrawGraph(options);
     }
 
     lib.redrawProbs = function(options) {

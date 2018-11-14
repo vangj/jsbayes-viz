@@ -34,6 +34,7 @@ interface CsvOptions {
 interface JsBayesViz {
   fromGraph(graph: any): VGraph;
   draw(options: DrawOptions): void;
+  redraw(options: DrawOptions): void;
   redrawProbs(options: DrawOptions): void;
   downloadSamples(graph: VGraph, asJson: boolean, options: CsvOptions | any): void;
 }
