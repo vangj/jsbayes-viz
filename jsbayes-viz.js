@@ -35,7 +35,7 @@
     const c = center(n);
     const cx = c.x;
     const cy = c.y;
-    const w = n.width / 2.0;
+    const w = NODE_WIDTH / 2.0;
     const h = n.height / 2.0;
     const d = distance(cx, cy, cx+w, cy+h);
     const x = cx + d * Math.cos(theta);
@@ -82,7 +82,7 @@
       out |= OUT_LEFT | OUT_RIGHT;
     } else if(x < n.x) {
       out |= OUT_LEFT;
-    } else if(x > n.x + n.width) {
+    } else if(x > n.x + NODE_WIDTH) {
       out |= OUT_RIGHT;
     }
 
