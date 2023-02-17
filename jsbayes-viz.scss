@@ -1,0 +1,57 @@
+svg {
+    border: 1px solid black;
+
+    g.node-group {
+        fill: #b0bec5;
+        rect {
+            &.node-shape {
+                cursor: move;
+                rx: .5rem;
+            }
+            &.node-bar {
+                fill: #37474f;
+                rx: .25rem;
+            }
+        }
+        
+        text {
+            font-family: arial !important;
+            &.node-name {
+                font-weight: 800;
+                cursor: move;
+            }
+            &.node-pct {
+                fill: #37474f;
+            }
+            &.node-value {
+                text-transform: capitalize;
+                fill: #37474f;
+                font-size: 15px;
+                cursor: crosshair;
+            }
+        }
+
+        line {
+            &.node-iqline {
+                stroke: #fff;
+                stroke-width: 1px;
+            }
+        }
+    }
+
+    line {
+        &.edge-line {
+            stroke: #37474f;
+            stroke-width: 2;
+        }
+    }
+    defs {
+        marker {
+            path {
+                &.edge-head {
+                    fill: #37474f;
+                }
+            }
+        }
+    }
+}

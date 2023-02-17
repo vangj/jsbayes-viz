@@ -1,7 +1,41 @@
-svg { border: 1px solid black; }
-svg g rect.node-shape { border-radius: 5px !important; fill:#ffecb3 !important; cursor: move; }
-svg g text.node-name { font-weight: 800 !important; cursor: move }
-svg g rect.node-bar { fill: green !important }
-svg g text.node-value { fill:rgb(0,0,0) !important; font-size: 15px; cursor: crosshair; }
-svg line.edge-line { stroke:rgb(0,0,0) !important }
-svg path.edge-head { fill:rgb(0,0,0) !important }
+svg {
+  border: 1px solid black;
+}
+svg g.node-group {
+  fill: #b0bec5;
+}
+svg g.node-group rect.node-shape {
+  cursor: move;
+  rx: 0.5rem;
+}
+svg g.node-group rect.node-bar {
+  fill: #37474f;
+  rx: 0.25rem;
+}
+svg g.node-group text {
+  font-family: arial !important;
+}
+svg g.node-group text.node-name {
+  font-weight: 800;
+  cursor: move;
+}
+svg g.node-group text.node-pct {
+  fill: #37474f;
+}
+svg g.node-group text.node-value {
+  text-transform: capitalize;
+  fill: #37474f;
+  font-size: 15px;
+  cursor: crosshair;
+}
+svg g.node-group line.node-iqline {
+  stroke: #fff;
+  stroke-width: 1px;
+}
+svg line.edge-line {
+  stroke: #37474f;
+  stroke-width: 2;
+}
+svg defs marker path.edge-head {
+  fill: #37474f;
+}
