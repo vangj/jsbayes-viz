@@ -131,6 +131,20 @@ npm install
 make
 ```
 
+# Bower
+
+Install [bower](https://bower.io).
+
+```bash
+npm install -g bower
+```
+
+Install libraries via bower.
+
+```bash
+bower install
+```
+
 # Citation
 
 ```
