@@ -66,7 +66,7 @@
     return p;
   }
   function center(node) {
-    const x = node.width / 2.0 + node.x,
+    const x = NODE_WIDTH / 2.0 + node.x,
         y = node.height / 2.0 + node.y;
     return { x: x, y: y };
   }
