@@ -114,7 +114,7 @@ A working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/
 
 * [Asia](https://run.plnkr.co/plunks/CJe4LbYhx42TAPXjIUum/)
 * [Gulf Coast](https://kelvinfkr.github.io/Gulf_Coast/)
-* [Dummy BBN](https://plnkr.co/plunk/LPDpLFByooWzngMU).
+* [Dummy BBN](https://plnkr.co/plunk/LPDpLFByooWzngMU)
 
 Here are some repositories of BBNs that you may use.
 
