@@ -3,9 +3,6 @@
   --node-theme-dark: #37474f;
 }
 
-svg {
-  border: 1px solid black;
-}
 svg g.node-group {
   fill: var(--node-theme-light);
 }

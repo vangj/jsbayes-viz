@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+  }
+  body .svg-wrapper {
+    flex: 1;
+    padding: 0;
+  }
+  body .svg-wrapper div {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+  body .svg-wrapper svg {
+    height: 100%;
+    width: 100%;
+  }
+  body footer {
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: #212121;
+  }
