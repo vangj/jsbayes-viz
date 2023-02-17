@@ -96,14 +96,15 @@ Each of the SVG components are now associated with a CSS class. You may apply a 
 Here's an example.
 
 ```
-svg g rect.node-shape { border-radius: 5px !important; fill:#ffecb3 !important; cursor: move; }
-svg g text.node-name { font-weight: 800 !important }
-svg g rect.node-bar { fill: green !important }
-svg g text.node-value { fill:rgb(0,0,0) !important; font-size: 15px; cursor: pointer; }
-svg line.edge-line { stroke:rgb(0,0,0) !important }
-svg path.edge-head { fill:rgb(0,0,0) !important }
+svg g rect.node-shape { border-radius: 5px; fill:#ffecb3; cursor: move; }
+svg g text.node-name { font-weight: 800 }
+svg g rect.node-bar { fill: green }
+svg g text.node-value { fill:rgb(0,0,0); font-size: 15px; cursor: pointer; }
+svg line.edge-line { stroke:rgb(0,0,0) }
+svg path.edge-head { fill:rgb(0,0,0) }
 ```
-Note that some styles for the elements are inlined and so you must use `!important` to override them.
+
+Or better yet, copy and modify [jsbayes-viz.scss](jsbayes-viz.scss) and modify it to your needs (you will need to generate the corresponding `css` file).
 
 # Some gotcha's
 If you have very long string literals as values for the node id/values, then these strings will be truncated to 5 characters at the current moment. Node names are also truncated to 15 characters.
