@@ -114,7 +114,7 @@ A working example is shown [here on Plunker](https://run.plnkr.co/plunks/fjL6Yq/
 
 * [Asia](https://run.plnkr.co/plunks/CJe4LbYhx42TAPXjIUum/)
 * [Gulf Coast](https://kelvinfkr.github.io/Gulf_Coast/)
-* [Dummy BBN learned via Spark BBN](https://run.plnkr.co/plunks/GFcem156HC2EwRECmtyH/) Go to [Spark BBN](https://github.com/vangj/spark-bbn) to learn more on how to use [Apache Spark](https://spark.apache.org/) to learn BBNs.
+* [Dummy BBN](https://plnkr.co/plunk/LPDpLFByooWzngMU).
 
 Here are some repositories of BBNs that you may use.
 
