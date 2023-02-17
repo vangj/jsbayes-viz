@@ -1,30 +1,36 @@
+:root {
+  --node-theme-light: #b0bec5;
+  --node-theme-dark: #37474f;
+}
+
 svg {
   border: 1px solid black;
 }
 svg g.node-group {
-  fill: #b0bec5;
+  fill: var(--node-theme-light);
 }
 svg g.node-group rect.node-shape {
   cursor: move;
   rx: 0.5rem;
 }
 svg g.node-group rect.node-bar {
-  fill: #37474f;
+  fill: var(--node-theme-dark);
   rx: 0.25rem;
 }
 svg g.node-group text {
   font-family: arial !important;
 }
 svg g.node-group text.node-name {
+  fill: var(--node-theme-dark);
   font-weight: 800;
   cursor: move;
 }
 svg g.node-group text.node-pct {
-  fill: #37474f;
+  fill: var(--node-theme-dark);
 }
 svg g.node-group text.node-value {
   text-transform: capitalize;
-  fill: #37474f;
+  fill: var(--node-theme-dark);
   font-size: 15px;
   cursor: crosshair;
 }
@@ -33,9 +39,9 @@ svg g.node-group line.node-iqline {
   stroke-width: 1px;
 }
 svg line.edge-line {
-  stroke: #37474f;
+  stroke: var(--node-theme-dark);
   stroke-width: 2;
 }
 svg defs marker path.edge-head {
-  fill: #37474f;
+  fill: var(--node-theme-dark);
 }

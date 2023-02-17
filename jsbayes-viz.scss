@@ -1,15 +1,20 @@
+:root {
+    --node-theme-light: #b0bec5;
+    --node-theme-dark: #37474f;
+}
+
 svg {
     border: 1px solid black;
 
     g.node-group {
-        fill: #b0bec5;
+        fill: var(--node-theme-light);
         rect {
             &.node-shape {
                 cursor: move;
                 rx: .5rem;
             }
             &.node-bar {
-                fill: #37474f;
+                fill: var(--node-theme-dark);
                 rx: .25rem;
             }
         }
@@ -17,15 +22,16 @@ svg {
         text {
             font-family: arial !important;
             &.node-name {
+                fill: var(--node-theme-dark);
                 font-weight: 800;
                 cursor: move;
             }
             &.node-pct {
-                fill: #37474f;
+                fill: var(--node-theme-dark);
             }
             &.node-value {
                 text-transform: capitalize;
-                fill: #37474f;
+                fill: var(--node-theme-dark);
                 font-size: 15px;
                 cursor: crosshair;
             }
@@ -41,7 +47,7 @@ svg {
 
     line {
         &.edge-line {
-            stroke: #37474f;
+            stroke: var(--node-theme-dark);
             stroke-width: 2;
         }
     }
@@ -49,7 +55,7 @@ svg {
         marker {
             path {
                 &.edge-head {
-                    fill: #37474f;
+                    fill: var(--node-theme-dark);
                 }
             }
         }
