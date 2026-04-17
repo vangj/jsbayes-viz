@@ -31,7 +31,13 @@
     "jsbayes": "0.0.6"
   },
   "devDependencies": {
+    "bower": "^1.8.14",
     "chai": "^3.5.0",
-    "mocha": "^5.2.0"
+    "eslint": "^9.39.1",
+    "jsdom": "^29.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^17.1.0",
+    "prettier": "^3.6.2",
+    "sass": "^1.94.2"
   }
 }

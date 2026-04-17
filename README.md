@@ -1,11 +1,10 @@
-jsbayes-viz
-===========
+# jsbayes-viz
 
 This JavaScript library is a Bayesian Belief Network (BBN) visualization and interaction tool. It is built on the following projects.
 
-* [d3](https://github.com/mbostock/d3)
-* [dagre](https://github.com/cpettitt/dagre)
-* [jsbayes](https://github.com/vangj/jsbayes)
+- [d3](https://github.com/mbostock/d3)
+- [dagre](https://github.com/cpettitt/dagre)
+- [jsbayes](https://github.com/vangj/jsbayes)
 
 # How do I use jsbayes-viz?
 
@@ -67,8 +66,7 @@ jsbayesviz.draw({
 });
 ```
 
-You may also download the samples in JSON or CSV format. To download in JSON format, call the following method. Note the first parameter is the graph (jsbayes-viz graph, *NOT* the jsbayes graph), the second parameter specifies the format (true means JSON and false means CSV), and the last parameter are options. Options are only available for CSV format, namely, to specify row and field delimiters.
-
+You may also download the samples in JSON or CSV format. To download in JSON format, call the following method. Note the first parameter is the graph (jsbayes-viz graph, _NOT_ the jsbayes graph), the second parameter specifies the format (true means JSON and false means CSV), and the last parameter are options. Options are only available for CSV format, namely, to specify row and field delimiters.
 
 ```
 jsbayesviz.downloadSamples(graph, true, {});
@@ -81,17 +79,18 @@ jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: '
 ```
 
 # Styling
+
 Each of the SVG components are now associated with a CSS class. You may apply a stylesheet to customize the look and feel of each of these SVG components/elements.
 
-* .node-group : all the elements belonging to a node
-* .node-name : the name of a node
-* .node-shape : the rectangle that encloses all the elements belonging to a node
-* .node-value : the node values
-* .node-pct : the node marginal probabilities correspoding to the values
-* .node-bar : the belief bars
-* .node-iqline : the interquartile lines (e.g. 25%, 50%, 75%)
-* .edge-line : the arc between two nodes
-* .edge-head : the arrow head at the end of an arc
+- .node-group : all the elements belonging to a node
+- .node-name : the name of a node
+- .node-shape : the rectangle that encloses all the elements belonging to a node
+- .node-value : the node values
+- .node-pct : the node marginal probabilities correspoding to the values
+- .node-bar : the belief bars
+- .node-iqline : the interquartile lines (e.g. 25%, 50%, 75%)
+- .edge-line : the arc between two nodes
+- .edge-head : the arrow head at the end of an arc
 
 Here's an example.
 
@@ -107,18 +106,19 @@ svg path.edge-head { fill:rgb(0,0,0) }
 Or better yet, copy and modify [jsbayes-viz.scss](jsbayes-viz.scss) and modify it to your needs (you will need to generate the corresponding `css` file).
 
 # Some gotcha's
+
 If you have very long string literals as values for the node id/values, then these strings will be truncated to 5 characters at the current moment. Node names are also truncated to 15 characters.
 
 # Examples
 
-* [Dummy BBN](https://plnkr.co/plunk/LPDpLFByooWzngMU)
+- [Dummy BBN](https://plnkr.co/plunk/LPDpLFByooWzngMU)
 
 Here are some repositories of BBNs that you may use.
 
-* [bnlearn](http://www.bnlearn.com/bnrepository/)
-* [netica](http://www.norsys.com/networklibrary.html)
-* [Gal Elidan](http://www.cs.huji.ac.il/~galel/Repository/)
-* [javabayes](https://www.cs.cmu.edu/~javabayes/Home/node7.html)
+- [bnlearn](http://www.bnlearn.com/bnrepository/)
+- [netica](http://www.norsys.com/networklibrary.html)
+- [Gal Elidan](http://www.cs.huji.ac.il/~galel/Repository/)
+- [javabayes](https://www.cs.cmu.edu/~javabayes/Home/node7.html)
 
 # Unit Testing
 
@@ -146,12 +146,12 @@ bower install
 # Citation
 
 ```
-@misc{vang_jsbayesviz_2016, 
-title={jsbayes-viz}, 
-url={https://github.com/vangj/jsbayes-viz/}, 
+@misc{vang_jsbayesviz_2016,
+title={jsbayes-viz},
+url={https://github.com/vangj/jsbayes-viz/},
 journal={GitHub},
-author={Vang, Jee}, 
-year={2016}, 
+author={Vang, Jee},
+year={2016},
 month={Jan}}
 ```
 

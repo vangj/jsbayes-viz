@@ -1,92 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <title>jsbayes discrete bayesian belief network visualization and interaction example</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link href="index.css" type="text/css" rel="stylesheet">
-  <link href="jsbayes-viz.css" type="text/css" rel="stylesheet">
-  <script src="bower_components/d3/d3.js"></script>
-  <script src="bower_components/lodash/lodash.js"></script>
-  <script src="bower_components/graphlib/dist/graphlib.core.js"></script>
-  <script src="bower_components/dagre/dist/dagre.core.js"></script>
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/jsbayes/jsbayes.js"></script>
-  <script src="jsbayes-viz.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</head>
-<body>
-  <div class="container-fluid svg-wrapper">
-    <div class="row">
-      <div class="col">
-        <svg id="bbn"></svg>
+  <head>
+    <title>
+      jsbayes discrete bayesian belief network visualization and interaction
+      example
+    </title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link href="index.css" type="text/css" rel="stylesheet" />
+    <link href="jsbayes-viz.css" type="text/css" rel="stylesheet" />
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/graphlib/dist/graphlib.core.js"></script>
+    <script src="bower_components/dagre/dist/dagre.core.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jsbayes/jsbayes.js"></script>
+    <script src="jsbayes-viz.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container-fluid svg-wrapper">
+      <div class="row">
+        <div class="col">
+          <svg id="bbn"></svg>
+        </div>
       </div>
     </div>
-  </div>
-  <footer class="container-fluid">
-    <div class="row">
-      <div class="col d-flex gap-2">
-        <button class="btn btn-primary" id="btnDownloadJson">download samples as json</button>
-        <button class="btn btn-primary" id="btnDownloadCsv">download samples as csv</button>
+    <footer class="container-fluid">
+      <div class="row">
+        <div class="col d-flex gap-2">
+          <button class="btn btn-primary" id="btnDownloadJson">
+            download samples as json
+          </button>
+          <button class="btn btn-primary" id="btnDownloadCsv">
+            download samples as csv
+          </button>
+        </div>
       </div>
-    </div>
-  </footer>
-  <script>
-  function getGraph() {
-    var graph = jsbayes.newGraph();
-    graph.saveSamples = true;
+    </footer>
+    <script>
+      function getGraph() {
+        var graph = jsbayes.newGraph();
+        graph.saveSamples = true;
 
-    var n1 = graph.addNode('n1', ['true', 'false']);
-    var n2 = graph.addNode('n2', ['true', 'false']);
-    var n3 = graph.addNode('n3', ['true', 'false']);
-    var n4 = graph.addNode('n4', ['true', 'false']);
-    var n5 = graph.addNode('n5', ['yes', 'maybe', 'no']);
+        var n1 = graph.addNode('n1', ['true', 'false']);
+        var n2 = graph.addNode('n2', ['true', 'false']);
+        var n3 = graph.addNode('n3', ['true', 'false']);
+        var n4 = graph.addNode('n4', ['true', 'false']);
+        var n5 = graph.addNode('n5', ['yes', 'maybe', 'no']);
 
-    n2.addParent(n1);
-    n3.addParent(n2);
-    n3.addParent(n4);
-    n5.addParent(n4);
+        n2.addParent(n1);
+        n3.addParent(n2);
+        n3.addParent(n4);
+        n5.addParent(n4);
 
-    n1.setCpt([ 0.25, 0.75 ]);
-    n2.setCpt([
-      [ 0.8, 0.2 ],
-      [ 0.2, 0.8 ]
-    ]);
-    n3.setCpt([
-      [ 0.99, 0.01 ],
-      [ 0.6, 0.4 ],
-      [ 0.6, 0.4 ],
-      [ 0.01, 0.99 ]
-    ]);
-    n4.setCpt([ 0.6, 0.4 ]);
-    n5.setCpt([
-      [ 0.6, 0.3, 0.1 ],
-      [ 0.1, 0.3, 0.6 ]
-    ]);
+        n1.setCpt([0.25, 0.75]);
+        n2.setCpt([
+          [0.8, 0.2],
+          [0.2, 0.8],
+        ]);
+        n3.setCpt([
+          [0.99, 0.01],
+          [0.6, 0.4],
+          [0.6, 0.4],
+          [0.01, 0.99],
+        ]);
+        n4.setCpt([0.6, 0.4]);
+        n5.setCpt([
+          [0.6, 0.3, 0.1],
+          [0.1, 0.3, 0.6],
+        ]);
 
-    graph.sample(20000);
+        graph.sample(20000);
 
-    var g = jsbayesviz.fromGraph(graph);
-    return g;
-  }
+        var g = jsbayesviz.fromGraph(graph);
+        return g;
+      }
 
-  $(document).ready(function() {
-    (function(window) {
-      var graph = getGraph();
-      jsbayesviz.draw({
-        id: '#bbn',
-        graph: graph,
-        samples: 15000
+      $(document).ready(function () {
+        (function (window) {
+          var graph = getGraph();
+          jsbayesviz.draw({
+            id: '#bbn',
+            graph: graph,
+            samples: 15000,
+          });
+
+          $('#btnDownloadJson').click(function () {
+            jsbayesviz.downloadSamples(graph, true);
+          });
+
+          $('#btnDownloadCsv').click(function () {
+            jsbayesviz.downloadSamples(graph, false, {
+              rowDelimiter: '\n',
+              fieldDelimiter: ',',
+            });
+          });
+        })(window);
       });
-
-      $('#btnDownloadJson').click(function() {
-        jsbayesviz.downloadSamples(graph, true);
-      });
-
-      $('#btnDownloadCsv').click(function() {
-        jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
-      });
-    })(window);
-  });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
