@@ -6,26 +6,58 @@ This JavaScript library is a Bayesian Belief Network (BBN) visualization and int
 - [dagre](https://github.com/cpettitt/dagre)
 - [jsbayes](https://github.com/vangj/jsbayes)
 
-# How do I use jsbayes-viz?
+## Development
 
-You should only be using this library on the client-side (e.g. with a browser). You may install this library using npm.
+Use the local `Makefile` for development and verification.
 
-`npm install jsbayes-viz --save`
-
-Since there are third party dependencies, you need to reference them in your HTML in the following order. Assuming you have used bower to install the library (and its dependencies), you may reference the libaries as the following.
-
+```bash
+make install
+make format
+make lint
+make test
+make coverage
+make build
+make clean
 ```
-<script src="node_modules/d3/d3.js"></script>
-<script src="node_modules/lodash/lodash.js"></script>
-<script src="node_modules/graphlib/dist/graphlib.core.js"></script>
-<script src="node_modules/dagre/dist/dagre.core.js"></script>
-<script src="node_modules/jsbayes/jsbayes.js"></script>
-<script src="node_modules/jsbayes-viz/jsbayes-viz.js"></script>
+
+Target summary:
+
+- `make install`: installs the Node toolchain with `npm ci` and installs browser example dependencies into `bower_components`
+- `make format`: formats the repo sources with Prettier
+- `make lint`: runs ESLint on the JavaScript sources and tests
+- `make test`: runs the Mocha test suite
+- `make coverage`: runs the test suite with NYC and writes LCOV output to `coverage/`
+- `make build`: compiles `index.scss` and `jsbayes-viz.scss` into `index.css` and `jsbayes-viz.css`
+- `make clean`: removes local dependencies and generated coverage artifacts
+
+To open the checked-in examples locally:
+
+```bash
+make install
+make build
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000/index.html` or `http://localhost:8000/asia.html`.
+
+## How do I use jsbayes-viz?
+
+You should only be using this library on the client side, typically from a browser page that loads the library and its dependencies in order.
+
+For this repository's local examples, `make install` populates `bower_components`, and the scripts are referenced like this:
+
+```html
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/graphlib/dist/graphlib.core.js"></script>
+<script src="bower_components/dagre/dist/dagre.core.js"></script>
+<script src="bower_components/jsbayes/jsbayes.js"></script>
+<script src="jsbayes-viz.js"></script>
 ```
 
 jsbayes is the inference engine, so to use jsbayes-viz, first create a jsbayes graph.
 
-```
+```js
 var graph = jsbayes.newGraph();
 var n1 = graph.addNode('n1', ['t', 'f']);
 var n2 = graph.addNode('n2', ['t', 'f']);
@@ -42,74 +74,97 @@ graph.reinit();
 graph.sample(10000);
 ```
 
-Then you create a corresponding jsbayes-viz graph from the jsbayes graph.
+Then create a corresponding jsbayes-viz graph from the jsbayes graph.
 
-```
+```js
 var g = jsbayesviz.fromGraph(graph);
 ```
 
-Assuming on your HTML page, you have an SVG element like the following.
+Assuming your HTML page includes an SVG element like this:
 
-```
+```html
 <svg id="bbn"></svg>
 ```
 
-Then you can kick off the visualization as follows.
+You can kick off the visualization as follows.
 
-```
+```js
 jsbayesviz.draw({
   id: '#bbn',
   width: 800,
   height: 800,
   graph: g,
-  samples: 15000
+  samples: 15000,
 });
 ```
 
-You may also download the samples in JSON or CSV format. To download in JSON format, call the following method. Note the first parameter is the graph (jsbayes-viz graph, _NOT_ the jsbayes graph), the second parameter specifies the format (true means JSON and false means CSV), and the last parameter are options. Options are only available for CSV format, namely, to specify row and field delimiters.
+You may also download samples in JSON or CSV format. The first parameter is the jsbayes-viz graph, not the original jsbayes graph. For CSV export, the last parameter accepts delimiter options.
 
-```
+```js
 jsbayesviz.downloadSamples(graph, true, {});
+jsbayesviz.downloadSamples(graph, false, {
+  rowDelimiter: '\n',
+  fieldDelimiter: ',',
+});
 ```
 
-An example of downloading samples as CSV is shown below.
+## Styling
 
+Each SVG component is associated with a CSS class that you can override.
+
+- `.node-group`: all elements belonging to a node
+- `.node-name`: the name of a node
+- `.node-shape`: the rectangle enclosing the node
+- `.node-value`: node values
+- `.node-pct`: node marginal probabilities corresponding to the values
+- `.node-bar`: belief bars
+- `.node-iqline`: interquartile lines such as 25%, 50%, and 75%
+- `.edge-line`: the arc between two nodes
+- `.edge-head`: the arrow head at the end of an arc
+
+Example overrides:
+
+```css
+svg g rect.node-shape {
+  border-radius: 5px;
+  fill: #ffecb3;
+  cursor: move;
+}
+svg g text.node-name {
+  font-weight: 800;
+}
+svg g rect.node-bar {
+  fill: green;
+}
+svg g text.node-value {
+  fill: rgb(0, 0, 0);
+  font-size: 15px;
+  cursor: pointer;
+}
+svg line.edge-line {
+  stroke: rgb(0, 0, 0);
+}
+svg path.edge-head {
+  fill: rgb(0, 0, 0);
+}
 ```
-jsbayesviz.downloadSamples(graph, false, { rowDelimiter: '\n', fieldDelimiter: ',' });
+
+The repository keeps the source styles in SCSS:
+
+- `index.scss`
+- `jsbayes-viz.scss`
+
+Rebuild the generated CSS with:
+
+```bash
+make build
 ```
 
-# Styling
+## Some gotchas
 
-Each of the SVG components are now associated with a CSS class. You may apply a stylesheet to customize the look and feel of each of these SVG components/elements.
+If you have very long string literals for node ids or values, those strings are currently truncated to 15 characters for node names and 5 characters for node values.
 
-- .node-group : all the elements belonging to a node
-- .node-name : the name of a node
-- .node-shape : the rectangle that encloses all the elements belonging to a node
-- .node-value : the node values
-- .node-pct : the node marginal probabilities correspoding to the values
-- .node-bar : the belief bars
-- .node-iqline : the interquartile lines (e.g. 25%, 50%, 75%)
-- .edge-line : the arc between two nodes
-- .edge-head : the arrow head at the end of an arc
-
-Here's an example.
-
-```
-svg g rect.node-shape { border-radius: 5px; fill:#ffecb3; cursor: move; }
-svg g text.node-name { font-weight: 800 }
-svg g rect.node-bar { fill: green }
-svg g text.node-value { fill:rgb(0,0,0); font-size: 15px; cursor: pointer; }
-svg line.edge-line { stroke:rgb(0,0,0) }
-svg path.edge-head { fill:rgb(0,0,0) }
-```
-
-Or better yet, copy and modify [jsbayes-viz.scss](jsbayes-viz.scss) and modify it to your needs (you will need to generate the corresponding `css` file).
-
-# Some gotcha's
-
-If you have very long string literals as values for the node id/values, then these strings will be truncated to 5 characters at the current moment. Node names are also truncated to 15 characters.
-
-# Examples
+## Examples
 
 - [Dummy BBN](https://plnkr.co/plunk/LPDpLFByooWzngMU)
 
@@ -120,32 +175,9 @@ Here are some repositories of BBNs that you may use.
 - [Gal Elidan](http://www.cs.huji.ac.il/~galel/Repository/)
 - [javabayes](https://www.cs.cmu.edu/~javabayes/Home/node7.html)
 
-# Unit Testing
+## Citation
 
-To run the unit tests, make sure you have NodeJS and npm installed and type in the following.
-
-```bash
-npm install
-make
-```
-
-# Bower
-
-Install [bower](https://bower.io).
-
-```bash
-npm install -g bower
-```
-
-Install libraries via bower.
-
-```bash
-bower install
-```
-
-# Citation
-
-```
+```bibtex
 @misc{vang_jsbayesviz_2016,
 title={jsbayes-viz},
 url={https://github.com/vangj/jsbayes-viz/},
@@ -155,9 +187,9 @@ year={2016},
 month={Jan}}
 ```
 
-# Copyright Stuff
+## Copyright
 
-```
+```text
 Copyright 2016 Jee Vang
 
 Licensed under the Apache License, Version 2.0 (the "License");
