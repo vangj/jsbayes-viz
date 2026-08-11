@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **Repository retired.** This development repository has no active Darkstar consumer and remains available only for historical source and its eight tags. Its final source revision is [`12c6f1ccfe0c9564c2d6fb52bd0ed35deeb904ae`](https://github.com/vangj/jsbayes-viz/commit/12c6f1ccfe0c9564c2d6fb52bd0ed35deeb904ae). Darkstar's maintained visualization package is [`packages/viz`](https://github.com/rocketvector/darkstar-bbn/tree/main/packages/viz); report current Darkstar visualization issues in [`rocketvector/darkstar-bbn`](https://github.com/rocketvector/darkstar-bbn/issues). No API compatibility with this retired project is implied.
+
 # jsbayes-viz
 
 This JavaScript library is a Bayesian Belief Network (BBN) visualization and interaction tool. It is built on the following projects.
